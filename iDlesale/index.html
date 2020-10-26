@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <title>iDlesale</title>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- <link rel="shortcut icon" href="/favicon.ico"/> -->
+  <link rel="stylesheet" href="assets/css/index.css">
+  <link rel="stylesheet" href="assets/css/loading.css">
+
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <transition name="fade">
+        <div id="load-wrapper" v-show="loading">
+          <h1>老学长售卖闲置物品系统</h1>
+          <div class="loading">
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+          </div>
+        </div>
+      </transition>
+      <!-- <img src="./assets/image/logo.png" width="50" @click="handleBack"> -->
+      <div class="desc" v-show="step == 1">
+        老学长售卖闲置物品系统  (翻转手机可查看详情)
+      </div>
+      <div class="desc" v-show="step == 1">
+        选择所需物品<span class="right-arrow"></span>点击下一步<span class="right-arrow"></span>添加微信并发送代码
+      </div>
+    </header>
+    <article>
+      <div class="idle-container" v-show="step === 1">
+
+
+        <div class="idle-list">
+          <div class="item" v-for="item in idleList" :key="item.id">
+            <div class="card" :class="{active: item.selected, soldout: item.mount===0}" @click="handleCardClick(item)">
+              <div class="img-wrapper">
+                <img :src="item.image">
+              </div>
+              <div class="desc">
+                <div class="title">
+                  {{item.title}}
+                </div>
+                <div class="description">
+                  {{item.description}}
+                </div>
+                <!-- <div class="isbn">
+                  库存：{{item.mount}}
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="total-bar" v-show="step === 1">
+        <div class="meta">
+          已选择<span class="mount">{{selectedMount}}</span>个物品，预计<span class="mount">{{totalPrice}}</span>元
+        </div>
+        <div class="btn" :class="{bidden: !selectedMount}" @click="getSelectList">
+          下一步
+        </div>
+      </div>
+      <div class="confirm-container" v-if="step === 2">
+        <div class="header-title">
+          您选择了 {{selectedIdle.length}} 样物品（<span @click="handleBack">返回重选？</span>）
+        </div>
+        <div class="confirm-list">
+          <div class="item" v-for="item in selectedIdle">
+            <img :src="item.image">
+            <div class="desc">
+              <div class="title">
+                {{item.title}}
+              </div>
+              <div class="description">
+                {{item.description}}
+              </div>
+            </div>
+          </div>
+          <div class="placeholder" v-show="selectedIdle.length === 0">
+            暂无
+          </div>
+        </div>
+        <div class="help">
+          <div class="header-title" style="margin-top: 20px;">
+            具体步骤
+          </div>
+          <p class="help-text">1. 添加老学长微信</p>
+          <p class="help-text">
+            <img src="./assets/image/qrcode.png" alt="">
+          </p>
+          <p class="help-text">2. 回复以下代码并支付 <span>{{totalPrice}} 元</span></p>
+          <div class="code">
+            {{selectIdStr}}
+          </div>
+          <p class="help-text">3. 上门取物或下门收物(楼下)</span></p>
+        </div>
+      </div>
+    </article>
+    <footer>
+      <div class="text">
+        Best wishes to you
+      </div>
+    </footer>
+  </div>
+  <script src="assets/js/vue.min.js"></script>
+  <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script> -->
+  <!-- <script src="assets/js/axios.min.js"></script> -->
+  <script src="assets/js/index.js?t=06132011"></script>
+
+</body>
+
+</html>
