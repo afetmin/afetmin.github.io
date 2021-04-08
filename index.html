@@ -157,251 +157,29 @@
     
     
     <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/10/26/Echarts%E6%95%B0%E6%8D%AE%E6%9B%B4%E6%96%B0%E5%9B%BE%E8%A1%A8%E4%B8%8D%E6%9B%B4%E6%96%B0%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E6%80%9D%E8%80%83/">Echarts数据更新图表不更新解决方法思考</a>
+      <a class="index-header" href="/2021/04/08/requestAnimationFrame%E6%80%9D%E8%80%83/">requestAnimationFrame思考</a>
 
-      <a href="/2020/10/26/Echarts%E6%95%B0%E6%8D%AE%E6%9B%B4%E6%96%B0%E5%9B%BE%E8%A1%A8%E4%B8%8D%E6%9B%B4%E6%96%B0%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E6%80%9D%E8%80%83/" class="index-excerpt">
+      <a href="/2021/04/08/requestAnimationFrame%E6%80%9D%E8%80%83/" class="index-excerpt">
         
         
           
         
-        <div>echart数据更新问题在使用vue-echarts组件时，通过watch监听option变化更新数据，用vue调试工具查看数据更新了，series数组内容改变了。但是echart的线表有部分数据是上次的，有部分是最新的。百思不得其解。最后突然想到vue的组件会复用，没有变化的不更新。最后通过强制更新图表插件解决问题。
-这里记录一下四种更新数据的方法
-刷新整个页面（最low的，可以借助route机</div>
+        <div>关于setTimeout首先要明白，setTimeout 的执行只是在内存中对元素属性进行改变，这个变化必须要等到屏幕下次绘制时才会被更新到屏幕上。如果两者的步调不一致，就可能会导致中间某一帧的操作被跨越过去，而直接更新下一帧的元素。假设屏幕每隔16.7ms刷新一次，而setTimeout 每隔10ms设置图像向左移动1px， 就会出现如下绘制过程（表格）：
+
+第    0  ms：屏幕未绘制， </div>
       </a>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-10-26
+            <i class="iconfont icon-date"></i>&nbsp;2021-04-08
           </div>
         
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/vue/">vue</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/vue/">vue</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/10/19/%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/">一些小技巧</a>
-
-      <a href="/2020/10/19/%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/" class="index-excerpt">
-        
-        
-          
-        
-        <div>关于vue.filters可以写在单个组件内，也可以单独写全局的然后加到main.js中，像是日期格式，数字格式就可以写在全局
-~~和！！&#126;是按位取反运算，&#126;&#126;是取反两次。&#126;&#126;的作用是去掉小数部分，因为位运算的操作值要求是整数，其结果也是整数，所以经过位运算的都会自动变成整数。！一个！是取反，！！两个再取反，就是强制转换成Boolen类型
-关于ma</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-10-19
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/vue/">vue</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%8A%80%E5%B7%A7/">技巧</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/09/28/module%E7%9A%84%E8%AF%AD%E6%B3%95/">module的语法</a>
-
-      <a href="/2020/09/28/module%E7%9A%84%E8%AF%AD%E6%B3%95/" class="index-excerpt">
-        
-        
-          
-        
-        <div>module的语法export 规定的是对外的接口，必须与模块内部变量建立一一对应关系
-// 报错
-export 1;
-
-// 报错
-var m = 1;
-export m;
-上面两种写法都会报错，因为没有提供对外的接口。第一种写法直接输出 1，第二种写法通过变量m，还是直接输出 1。1只是一个值，不是接口。正确的写法是下面这样。
-// 写法一
-export var m = 1;
-
-// 写法二
-</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-09-28
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/ES6/">ES6</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/ES6/">ES6</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/09/24/%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8%E4%B8%AD%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/">组件使用中的小细节</a>
-
-      <a href="/2020/09/24/%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8%E4%B8%AD%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" class="index-excerpt">
-        
-        
-          
-        
-        <div>is的使用当使用表格时，只能在tbody中添加td，可以使用is=’模板名称’
-data的定义在根组件中可以用对象，子组件中data只能是一个方法
-ref方法可以获取ref的DOM结构，和ref组件中的数据
-父子组件传值父组件可以向子组件传递任何数据，但子组件不能直接修改父组件的值（单向数据流）,当不写v-bind时，传递的就是一个字符串，写了:或者v-bind后就是一个javascript表达式</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-09-24
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/vue/">vue</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/vue/">vue</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/09/24/vue%E4%B8%ADv-if/">vue中v-if</a>
-
-      <a href="/2020/09/24/vue%E4%B8%ADv-if/" class="index-excerpt">
-        
-        
-          
-        
-        <div>v-if当在input框中使用v-if时，如果输入了字符后，改变v-if的显示时，input中的内容不会变化，这是因为vue会尽量复用页面的内容，增加渲染效率，这时可以为每个input增加一个key值，这样vue发现key值不同便不会复用了。
-v-for使用v-for时，如果不想在外层添加一个div标签，可以使用template作为模版占位符，这个不会在页面中渲染。
-$set向对象增加属性值时，一</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-09-24
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/vue/">vue</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/vue/">vue</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/08/23/slice%E7%9A%84%E6%80%9D%E8%80%83/">slice的思考</a>
-
-      <a href="/2020/08/23/slice%E7%9A%84%E6%80%9D%E8%80%83/" class="index-excerpt">
-        
-        
-          
-        
-        <div>关于为何在函数中使用Array.prototype.slice.call而不是直接用slice？经常会看到这种写法，在一个函数中使用，Array.prototype.slice.call(arguments,1); 除了防止传入的arguments有slice同名函数，还有其他什么用处吗？
-尤大的回答：
-
-arguments是每个函数在运行的时候自动获得的一个近似数组的对象（传入函数的参数从0开始</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-08-23
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              <a href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a>
             
           </div>
         
@@ -421,43 +199,28 @@ arguments是每个函数在运行的时候自动获得的一个近似数组的�
     
     
     <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/07/17/express%E4%B8%89%E5%A4%A7%E6%A6%82%E5%BF%B5/">express三大概念</a>
+      <a class="index-header" href="/2021/04/01/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">三次握手和四次挥手</a>
 
-      <a href="/2020/07/17/express%E4%B8%89%E5%A4%A7%E6%A6%82%E5%BF%B5/" class="index-excerpt">
+      <a href="/2021/04/01/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" class="index-excerpt">
         
         
           
         
-        <div>Express 三大基础概念中间件中间件是一个函数，在请求和响应周期中被顺序调用
-const myLogger = function(req, res, next) &#123;
-  console.log('myLogger')
-  next()
-&#125;
-
-app.use(myLogger)
-提示：中间件需要在响应结束前被调用
-路由应用如何响应请求的一种规则响应 / 路径的 get 请求：</div>
+        <div>三次握手• 第一次握手([SYN], Seq = x)客户端发送一个SYN标记的包，Seq初始序列号x，发送完成后客户端进入SYN_SEND状态。• 第二次握手([SYN,ACK], Seq = y, ACK = x + 1)服务器返回确认包(ACK)应答，同时还要发送一个SYN包回去。ACK = x + 1,表示确认收到(客户端发来的Seq值 + 1)，Seq = y, 表示让客户端确认是否能收</div>
       </a>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-07-17
+            <i class="iconfont icon-date"></i>&nbsp;2021-04-01
           </div>
         
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
-            
-          </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/express/">express</a>
+              <a href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
             
           </div>
         
@@ -469,25 +232,29 @@ app.use(myLogger)
     
     
     <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/07/14/class%E5%92%8Cstyle%E7%BB%91%E5%AE%9A/">class和style绑定,vue.observable,slot插槽</a>
+      <a class="index-header" href="/2020/12/31/vue%E5%9C%A8style%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%AE%8A%E9%87%8F/">vue在style中使用變量</a>
 
-      <a href="/2020/07/14/class%E5%92%8Cstyle%E7%BB%91%E5%AE%9A/" class="index-excerpt">
+      <a href="/2020/12/31/vue%E5%9C%A8style%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%AE%8A%E9%87%8F/" class="index-excerpt">
         
         
           
         
-        <div>class和style绑定&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;class 和 style 绑定的高级用法&lt;/title&gt;
-    &lt;script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt</div>
+        <div>在style中使用js变量&lt;template&gt;
+  &lt;div class="box" :style="styleVar"&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default &#123;
+  props: &#123;
+    height: &#123;
+      type: Number,
+ </div>
       </a>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-07-14
+            <i class="iconfont icon-date"></i>&nbsp;2020-12-31
           </div>
         
         
@@ -495,6 +262,46 @@ app.use(myLogger)
             <i class="iconfont icon-category"></i>
             
               <a href="/categories/vue/">vue</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%BF%9B%E9%98%B6/">进阶</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/11/30/betterscroll%E7%9A%84refresh%E9%97%AE%E9%A2%98/">betterscroll的refresh问题</a>
+
+      <a href="/2020/11/30/betterscroll%E7%9A%84refresh%E9%97%AE%E9%A2%98/" class="index-excerpt">
+        
+        
+          
+        
+        <div>betterscroll 在数据更新时问题由于 betterscroll的实例化要先于我动态设置wrapper的高度导致betterscroll开始计算时的内高和外容器高度一致，hasVerticalScroll 的值为 false  。需要在页面更新后refresh一下。最后通过在 update 钩子函数中增加 betterScroll 的refresh 方法，成功实现滚动效果。update 函</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-11-30
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a>
             
           </div>
         
@@ -514,31 +321,35 @@ app.use(myLogger)
     
     
     <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/07/14/filters%E5%92%8Cwatch/">filters和watch</a>
+      <a class="index-header" href="/2020/11/30/better-scroll%E7%BB%93%E5%90%88vue%E9%81%87%E5%88%B0%E5%9B%BE%E7%89%87%E5%BC%95%E8%B5%B7%E7%9A%84%E9%97%AE%E9%A2%98/">better-scroll结合vue遇到图片引起的问题</a>
 
-      <a href="/2020/07/14/filters%E5%92%8Cwatch/" class="index-excerpt">
+      <a href="/2020/11/30/better-scroll%E7%BB%93%E5%90%88vue%E9%81%87%E5%88%B0%E5%9B%BE%E7%89%87%E5%BC%95%E8%B5%B7%E7%9A%84%E9%97%AE%E9%A2%98/" class="index-excerpt">
         
         
           
         
-        <div>provide和inject跨组件信息传递不用 组件一传给组件二，组件二再传给组件三 ，可以直接组件一传给组件二
-filter&amp;watchfilters用法&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;过滤器 filter&lt;/title&gt;
-    &lt;script src="https://cdn.jsdelivr.net/npm</div>
+        <div>使用better-scroll遇到的问题原来项目中只使用了better-scroll来做轮播图和滑动组件，但是头部和标签栏是固定的，只滑动下面部分，于是设置 scroll-warpper样式如下：
+.scroll-wrapper &#123;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+&#125;
+</div>
       </a>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-07-14
+            <i class="iconfont icon-date"></i>&nbsp;2020-11-30
           </div>
         
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/vue/">vue</a>
+              <a href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a>
             
           </div>
         
@@ -557,40 +368,67 @@ filter&amp;watchfilters用法&lt;html&gt;
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/06/15/CSS%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7%E5%92%8CBFC/" target="_self">
-          <img src="/img/CSS%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7%E5%92%8CBFC/%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7.png" srcset="/img/loading.gif" alt="CSS高度塌陷和BFC">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2020/06/15/CSS%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7%E5%92%8CBFC/">CSS高度塌陷和BFC</a>
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/11/29/v-show%E5%92%8Cv-if%E7%9A%84%E6%80%9D%E8%80%83/">v-show和v-if的思考</a>
 
-      <a href="/2020/06/15/CSS%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7%E5%92%8CBFC/" class="index-excerpt">
+      <a href="/2020/11/29/v-show%E5%92%8Cv-if%E7%9A%84%E6%80%9D%E8%80%83/" class="index-excerpt">
         
         
           
         
-        <div>高度塌陷当子元素浮动时，脱离了文档流，导致父元素高度撑不起来。这时可以通过在在子元素后面添加内容，并且清楚它的浮动来使其跟在浮动元素的后面，这样就可以撑起父元素的高度了。子元素加上下面这个 clearfix 类就可以了。
-clearfix::after &#123;
-  content: '';
-  display: block;
-  clear: both;
-&#125;
-相邻元素的外边距重叠子</div>
+        <div>v-show和v-if今天在写一个项目时，遇到了一个问题。使用了better-scroll来做页面滚动，首页进入后可以滚动，但是点击搜索框后出现搜索记录却无法滚动。查看scroll的打印发现 hasVerticalScroll: false，并且scrollerHeight和clientHeight都是0，那就是都没有获得高度。最后把v-show改成v-if就可以了。
+
+问题出现原因：众所周知，v</div>
       </a>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-06-15
+            <i class="iconfont icon-date"></i>&nbsp;2020-11-29
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/vue/">vue</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/11/21/js%E8%AF%AD%E6%B3%95%E7%BB%86%E8%8A%82/">js语法细节</a>
+
+      <a href="/2020/11/21/js%E8%AF%AD%E6%B3%95%E7%BB%86%E8%8A%82/" class="index-excerpt">
+        
+        
+          
+        
+        <div>箭头函数中的this它们没有 this。在箭头函数内部访问到的 this 都是从外部获取的。
+可选链
+通常我们这样写let user = &#123;&#125;; // user 没有 address
+alert( user &amp;&amp; user.address &amp;&amp; user.address.street ); // undefined（不报错）
+依次对整条路径上的属</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-11-21
           </div>
         
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/CSS/">CSS</a>
+              <a href="/categories/js/">js</a>
             
           </div>
         
@@ -598,7 +436,132 @@ clearfix::after &#123;
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/CSS/">CSS</a>
+              <a href="/tags/%E8%BF%9B%E9%98%B6/">进阶</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/11/07/vue%E4%B8%AD%E7%9A%84-passive%E4%BF%AE%E9%A5%B0%E7%AC%A6/">vue中的.passive修饰符</a>
+
+      <a href="/2020/11/07/vue%E4%B8%AD%E7%9A%84-passive%E4%BF%AE%E9%A5%B0%E7%AC%A6/" class="index-excerpt">
+        
+        
+          
+        
+        <div>vue中的 .passive 修饰符Vue提供了事件绑定的语法糖，我们在标签中可直接使用形如v-on:click，@click，@focus的形式绑定事件监听器，并且可以使用修饰符对事件进行option设置。本次解释下prevent 与passive的修饰符。prevent 是拦截默认事件，passive是不拦截默认事件。
+prevent某些标签拥有自身的默认事件，如a[href=”#”]，but</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-11-07
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/vue/">vue</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/11/06/vue%E7%9A%84%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A/">vue的双向数据绑定</a>
+
+      <a href="/2020/11/06/vue%E7%9A%84%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A/" class="index-excerpt">
+        
+        
+          
+        
+        <div>vue的双向数据绑定vue数据双向绑定是通过数据劫持结合发布者-订阅者模式的方式来实现的。原理图：
+通过 Object.defineProperty() 方法劫持 对象的 getter、setter方法，在通过发布订阅模式完成 data –&gt; 视图 和 视图 –&gt; data 的双向更新。具体查看: vue的双向绑定
+</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-11-06
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/vue/">vue</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/11/06/token%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">hexo部署时出现excepted token解决方法</a>
+
+      <a href="/2020/11/06/token%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="index-excerpt">
+        
+        
+          
+        
+        <div>hexo部署时出现json解析错误部署时出现 excepted token x in position，很奇怪，找到源代码有一句json.parse,打印了一下发现是某个json对象传入了json.parse。但是这个json对象还必须要有。最后想到了skip_render，发现已经配置了，但是还是渲染的了那些文件。
+skip_render:
+  - &quot;somedir&#x2F;*&qu</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-11-06
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%94%99%E8%AF%AF/">错误</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/hexo/">hexo</a>
             
           </div>
         
@@ -610,7 +573,7 @@ clearfix::after &#123;
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   

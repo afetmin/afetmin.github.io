@@ -143,7 +143,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    277 字
+                    419 字
                   </span>
                 
 
@@ -153,7 +153,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    3
+                    4
                      分钟
                   </span>
                 
@@ -205,6 +205,15 @@
   <span class="hljs-attribute">overflow</span>: hidden;
 &#125;</code></pre></div>
 
+<h2 id="图片自适应问题"><a href="#图片自适应问题" class="headerlink" title="图片自适应问题"></a>图片自适应问题</h2><p>通过这样写css，可以直接获取图片高度，而不用等到图片加载出再获得。</p>
+<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-tag">position</span>: <span class="hljs-selector-tag">relative</span>;
+<span class="hljs-selector-tag">width</span>: 100%;
+<span class="hljs-selector-tag">height</span>: 0;
+<span class="hljs-selector-tag">padding-top</span>: 70%;
+<span class="hljs-selector-tag">transfrom-origin</span>: <span class="hljs-selector-tag">top</span>;
+<span class="hljs-selector-tag">background-size</span>: <span class="hljs-selector-tag">cover</span>;</code></pre></div>
+<p>通过 width:100%和 padding-top:70%控制图片的宽高比为10:7，当页面加载时，宽度确定了，高度也就确定了。</p>
+<p>图片宽度设置100%，页面加载时会存在高度塌陷的问题，可以使用padding－top来设置百分比值来实现自适应 padding-top = (图片的高度/图片的宽度)*100。</p>
 
             </article>
             <hr>

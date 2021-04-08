@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title></title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script>
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <div id="app">
+    <header v-show="!visible">将浏览器设置全屏，输入以下内容生成请假页面。点击再次提交重新生成。</header>
+    <div class="form-wrapper" v-show="!visible">
+      <div>
+        <label for="name">姓名：</label>
+        <input type="text" id="name" v-model="name" placeholder="输入你的名字">
+      </div>
+      <div>
+        <label for="qingjia">请假类型：</label>
+        <select name="" id="qingjia" v-model='qingjia'>
+          <option value="1">事假</option>
+          <option value="2">病假</option>
+        </select>
+      </div>
+      <div>
+        <label for="grade">所在班级：</label>
+        <input type="text" id="grade" v-model="grade" placeholder="输入班级，如：193班">
+      </div>
+      <div>
+        <label for="content">请假内容：</label>
+        <input type="text" id="content" v-model="content" placeholder="输入请假理由，别太过分">
+      </div>
+      <input type="button" value="确认" id="confirm" @click="getHtml">
+    </div>
+    <div class="container" v-show="visible">
+      <div id="time"  v-show="!visible">{{currentTime | fmt}}</div>
+      <div class="img-header">
+        <div class="img-wrapper" v-if="!visible">
+          <img src="assets/imgs/header3.jpg" alt="">
+        </div>
+        <div class="header">
+          <div class="back">
+            <img src="assets/imgs/back.svg" alt="">
+          </div>
+          <div class="title">研究生出校请假申请</div>
+          <div class="icon-wrapper">
+            <div class="dots">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="line"></div>
+            <div class="close-wrapper">
+              <img src="assets/imgs/close.svg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="title-wrapper-border">
+          <div class="title-wrapper">
+            <img src="https://picsum.photos/50">
+            <span class="title">{{name}}的研究生出校请假</span>
+            <span class="via">已通过</span>
+          </div>
+        </div>
+        <div class="reply-desc">
+          <div class="reply-title">申请详情</div>
+          <div class="reply-content">
+            <div class="reply-item" v-for="item in replys" :key="item.id">
+              <div class="item-name">{{item.name}}</div>
+              <div class="item-content" v-if="item.type === 1">{{item.content}}</div>
+              <div class="item-content" v-else>
+                <div class="map-wrapper">
+                  <img src="assets/imgs/map.jpg">
+                  <div class="map-desc">
+                    <div class="h2">大连民族大学(金州区辽河西路18号)</div>
+                    <div class="h4">辽宁省大连市金州区民院北路</div>
+                    <div class="h5">位置上传时间:{{submitTime}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="block"></div>
+        <div class="boss">
+          <div class="boss-title">审批流程</div>
+          <div class="boss-agree">
+            <div class="agree-title">
+              <div class="img-wrapper">
+                <img src="assets/imgs/audit.svg">
+              </div>
+              <span>所在二级学院辅导员 · 已同意</span>
+              <img src="assets/imgs/up-tri.svg" alt="">
+            </div>
+            <div class="agree-item">
+              <span class="line"></span>
+              <div class="img-wrapper">
+                <img src="assets/imgs/boss.jpg">
+                <div id="yes-wrapper">
+                  <img src="assets/imgs/yes.svg" class="yes">
+                </div>
+              </div>
+              <div class="desc">
+                <span class="boss-name">时伟超</span>
+                <span class="other">已同意·{{approvalTime}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="boss-send">
+            <div class="agree-title">
+              <div class="img-wrapper">
+                <img src="assets/imgs/plane.svg" alt="">
+              </div>
+              <span class="boss-name">抄送人 · 已抄送</span>
+              <img src="assets/imgs/up-tri.svg" alt="">
+            </div>
+            <div class="agree-item">
+              <div class="img-wrapper">
+                <img src="assets/imgs/boss.jpg">
+              </div>
+              <div class="desc">
+                <span class="boss-name">时伟超</span>
+                <span class="other">已抄送·{{approvalTime}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="block"></div>
+        <div class="add">
+          <div class="img-wrapper">
+            <img src="assets/imgs/credit.svg" alt="">
+          </div>
+          <span>添加备注</span>
+        </div>
+        <div class="block"></div>
+        <div class="zero"></div>
+        <div class="re-confirm">
+          <div class="img-wrapper">
+            <img src="assets/imgs/refresh.svg" alt="">
+          </div>
+          <span @click="hideHtml">再次提交</span>
+        </div>
+      </div>
+    </div>
+
+    <footer v-show="!visible">免责声明：本网站所有内容仅供学习参考，使用本网站内容由此引起的一切后果均须自行承担责任，与本站无关。有问题联系 kingpenguins#163.com(#换@)</footer>
+  </div>
+</body>
+<script src="assets/js/index.js"></script>
+
+</html>
