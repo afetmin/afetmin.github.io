@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>electron和react关联开发使用的小工具</title>
+    <link href="/2021/04/14/electron%E5%92%8Creact%E5%85%B3%E8%81%94%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B0%8F%E5%B7%A5%E5%85%B7/"/>
+    <url>/2021/04/14/electron%E5%92%8Creact%E5%85%B3%E8%81%94%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B0%8F%E5%B7%A5%E5%85%B7/</url>
+    
+    <content type="html"><![CDATA[<h2 id="concurrently"><a href="#concurrently" class="headerlink" title="concurrently"></a>concurrently</h2><p>当执行多个命令时使用，跨平台，输出友好。<br>如：</p><div class="hljs"><pre><code class="hljs json">"dev": "concurrently \"wait-on http://localhost:3000 &amp;&amp; electron .\" \"cross-env BROWSER=none npm start\"",</code></pre></div><h2 id="wait-on"><a href="#wait-on" class="headerlink" title="wait-on"></a>wait-on</h2><p>等待文件，端口，网络资源就绪后执行命令。<br>如：</p><div class="hljs"><pre><code class="hljs json">"dev": "concurrently \"wait-on http://localhost:3000 &amp;&amp; electron .\" \"cross-env BROWSER=none npm start\"",</code></pre></div><p>等待3000端口内容就绪后执行<code>electron .</code>。</p><h2 id="cross-env"><a href="#cross-env" class="headerlink" title="cross-env"></a>cross-env</h2><p>跨平台设置环境变量</p><div class="hljs"><pre><code class="hljs json">cross-env BROWSER=none npm start</code></pre></div><p>执行后面的命令时不打开浏览器</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>工具</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>electron</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>requestAnimationFrame思考</title>
     <link href="/2021/04/08/requestAnimationFrame%E6%80%9D%E8%80%83/"/>
     <url>/2021/04/08/requestAnimationFrame%E6%80%9D%E8%80%83/</url>
