@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#147153">
+  <meta name="description" content="">
+  <meta name="author" content="yilun">
+  <meta name="keywords" content="">
+  <title>CSS伪类实现三角形 - afetmin&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night-eighties.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>瞎写一气，乱编一通</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-06-02 10:16">
+                    2020年6月2日 上午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    930 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    16
+                     分钟
+                  </span>
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
+                    <i class="iconfont icon-eye" aria-hidden="true"></i>
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="CSS实现三角形"><a href="#CSS实现三角形" class="headerlink" title="CSS实现三角形"></a>CSS实现三角形</h2><div class="hljs"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"Content-Type"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"text/html; charset=UTF-8"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Insert title here<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/css"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"colorFlipFlop"</span>&gt;</span>
+<span class="css">  * &#123;<span class="hljs-attribute">margin</span>:<span class="hljs-number">0</span>; <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;&#125;</span>
+<span class="css">  <span class="hljs-selector-class">.demo</span> &#123;</span>
+    width: 100px;
+    height: 100px;
+    position: relative;
+<span class="css">    <span class="hljs-selector-tag">border</span>: 1<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#09f</span>;</span>
+    margin: 100px;
+  &#125;
+<span class="css">  <span class="hljs-selector-class">.demo</span><span class="hljs-selector-pseudo">:after</span> &#123;</span>
+    width: 0px;
+    height: 0px;
+    border-width: 12px;
+    border-style: solid;
+<span class="css">    <span class="hljs-comment">/* 上 右 下 左 */</span></span>
+<span class="css">    <span class="hljs-selector-tag">border-color</span>: <span class="hljs-selector-tag">transparent</span> <span class="hljs-selector-tag">transparent</span> <span class="hljs-selector-id">#933</span> <span class="hljs-selector-tag">transparent</span>;</span>
+    position: absolute;
+    content: ' ';
+    left: 39px;
+    top: -24px;
+  &#125;
+<span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"demo"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
+<h3 id="实心三角形"><a href="#实心三角形" class="headerlink" title="实心三角形"></a>实心三角形</h3><div class="hljs"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/css"</span>&gt;</span>
+<span class="css">           <span class="hljs-selector-class">.tri_top</span>, <span class="hljs-selector-class">.tri_right</span>, <span class="hljs-selector-class">.tri_bottom</span>, <span class="hljs-selector-class">.tri_left</span>&#123;</span>
+               width: 150px;
+               height: 100px;
+<span class="css">               <span class="hljs-selector-tag">background</span>: <span class="hljs-selector-id">#CCCCCC</span>;</span>
+               border-radius: 8px;
+               margin: 50px 50px;
+               position: relative;
+               float: left;
+           &#125;
+<span class="css">           <span class="hljs-selector-class">.tri_top</span><span class="hljs-selector-pseudo">:before</span>&#123;</span>
+               content: "";
+               width: 0px;
+               height: 0px;
+               border-left: 10px solid transparent;
+               border-right: 10px solid transparent;
+<span class="css">               <span class="hljs-selector-tag">border-bottom</span>: 10<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#CCCCCC</span>;</span>
+               position: absolute;
+               top: -10px;
+               left: 65px;
+           &#125;
+<span class="css">           <span class="hljs-selector-class">.tri_right</span><span class="hljs-selector-pseudo">:before</span>&#123;</span>
+               content: "";
+               width: 0px;
+               height: 0px;
+               border-top: 10px solid transparent;
+               border-bottom: 10px solid transparent;
+<span class="css">               <span class="hljs-selector-tag">border-left</span>: 10<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#CCCCCC</span>;</span>
+               position: absolute;
+               top: 40px;
+               left: 150px;
+           &#125;
+<span class="css">           <span class="hljs-selector-class">.tri_bottom</span><span class="hljs-selector-pseudo">:before</span>&#123;</span>
+               content: "";
+               width: 0px;
+               height: 0px;
+<span class="css">               <span class="hljs-selector-tag">border-top</span>: 10<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#CCCCCC</span>;</span>
+               border-left: 10px solid transparent;
+               border-right: 10px solid transparent;
+               position: absolute;
+               top: 100px;
+               left: 70px;
+           &#125;
+<span class="css">           <span class="hljs-selector-class">.tri_left</span><span class="hljs-selector-pseudo">:before</span>&#123;</span>
+               content: "";
+               width: 0px;
+               height: 0px;
+               border-top: 10px solid transparent;
+               border-bottom: 10px solid transparent;
+<span class="css">               <span class="hljs-selector-tag">border-right</span>: 10<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#CCCCCC</span>;</span>
+               position: absolute;
+               top: 40px;
+               left: -10px;
+           &#125;
+       <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tri_top"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>         <span class="hljs-comment">&lt;!--三角形在上边--&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tri_right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>       <span class="hljs-comment">&lt;!--三角形在右边--&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tri_bottom"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>      <span class="hljs-comment">&lt;!--三角形在底边--&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tri_left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>        <span class="hljs-comment">&lt;!--三角形在左边--&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
+<p><img src="/img/CSS%E4%BC%AA%E7%B1%BB%E5%AE%9E%E7%8E%B0%E4%B8%89%E8%A7%92%E5%BD%A2/tri.png" srcset="/img/loading.gif" alt="实心三角形"></p>
+<h3 id="空心三角形"><a href="#空心三角形" class="headerlink" title="空心三角形"></a>空心三角形</h3><div class="hljs"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/css"</span>&gt;</span>
+<span class="css">            <span class="hljs-selector-class">.tri_top</span>, <span class="hljs-selector-class">.tri_right</span>, <span class="hljs-selector-class">.tri_bottom</span>, <span class="hljs-selector-class">.tri_left</span>&#123;</span>
+                width: 150px;
+                height: 100px;
+<span class="css">                <span class="hljs-selector-tag">border</span>: 1<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#000000</span>;</span>
+                border-radius: 8px;
+                margin: 50px 50px;
+                position: relative;
+                float: left;
+            &#125;
+<span class="css">            <span class="hljs-selector-class">.tri_top</span><span class="hljs-selector-pseudo">:before</span>&#123;</span>
+                content: "";
+                width: 0px;
+                height: 0px;
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+<span class="css">                <span class="hljs-selector-tag">border-bottom</span>: 15<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#000000</span>;</span>
+                position: absolute;
+                top: -15px;
+                left: 65px;
+            &#125;
+<span class="css">            <span class="hljs-selector-class">.tri_top</span><span class="hljs-selector-pseudo">:after</span>&#123;</span>
+                content: "";
+                width: 0px;
+                height: 0px;
+                border-left: 14px solid transparent;
+                border-right: 14px solid transparent;
+<span class="css">                <span class="hljs-selector-tag">border-bottom</span>: 14<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#FFFFFF</span>;</span>
+                position: absolute;
+                top: -14px;
+                left: 66px;
+            &#125;
+<span class="css">            <span class="hljs-selector-class">.tri_right</span><span class="hljs-selector-pseudo">:before</span>&#123;</span>
+                content: "";
+                width: 0px;
+                height: 0px;
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+<span class="css">                <span class="hljs-selector-tag">border-left</span>: 15<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#000000</span>;</span>
+                position: absolute;
+                top: 39px;
+                left: 150px;
+            &#125;
+<span class="css">            <span class="hljs-selector-class">.tri_right</span><span class="hljs-selector-pseudo">:after</span>&#123;</span>
+                content: "";
+                width: 0px;
+                height: 0px;
+                border-top: 14px solid transparent;
+                border-bottom: 14px solid transparent;
+<span class="css">                <span class="hljs-selector-tag">border-left</span>: 14<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#FFFFFF</span>;</span>
+                position: absolute;
+                top: 40px;
+                left: 149px;
+            &#125;
+<span class="css">            <span class="hljs-selector-class">.tri_bottom</span><span class="hljs-selector-pseudo">:before</span>&#123;</span>
+                content: "";
+                width: 0px;
+                height: 0px;
+<span class="css">                <span class="hljs-selector-tag">border-top</span>: 15<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#000000</span>;</span>
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+                position: absolute;
+                top: 101px;
+                left: 69px;
+            &#125;
+<span class="css">            <span class="hljs-selector-class">.tri_bottom</span><span class="hljs-selector-pseudo">:after</span>&#123;</span>
+                content: "";
+                width: 0px;
+                height: 0px;
+<span class="css">                <span class="hljs-selector-tag">border-top</span>: 14<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#FFFFFF</span>;</span>
+                border-left: 14px solid transparent;
+                border-right: 14px solid transparent;
+                position: absolute;
+                top: 100px;
+                left: 70px;
+            &#125;
+<span class="css">            <span class="hljs-selector-class">.tri_left</span><span class="hljs-selector-pseudo">:before</span>&#123;</span>
+                content: "";
+                width: 0px;
+                height: 0px;
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+<span class="css">                <span class="hljs-selector-tag">border-right</span>: 15<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#000000</span>;</span>
+                position: absolute;
+                top: 40px;
+                left: -15px;
+            &#125;
+<span class="css">            <span class="hljs-selector-class">.tri_left</span><span class="hljs-selector-pseudo">:after</span>&#123;</span>
+                content: "";
+                width: 0px;
+                height: 0px;
+                border-top: 14px solid transparent;
+                border-bottom: 14px solid transparent;
+<span class="css">                <span class="hljs-selector-tag">border-right</span>: 14<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#FFFFFF</span>;</span>
+                position: absolute;
+                top: 41px;
+                left: -14px;
+            &#125;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tri_top"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>         <span class="hljs-comment">&lt;!--三角形在上边--&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tri_right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>       <span class="hljs-comment">&lt;!--三角形在右边--&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tri_bottom"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>      <span class="hljs-comment">&lt;!--三角形在底边--&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tri_left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>        <span class="hljs-comment">&lt;!--三角形在左边--&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
+<p><img src="/img/CSS%E4%BC%AA%E7%B1%BB%E5%AE%9E%E7%8E%B0%E4%B8%89%E8%A7%92%E5%BD%A2/tri2.png" srcset="/img/loading.gif" alt="空心三角形"></p>
+<p>总结：<br> 三角形往哪个方向，那个方向无需设置border，而相反方向设置border颜色，相邻两边的border设为透明。这样就可实现各个方向的三角形。实心三角形利用CSS中的伪元素（：before）实现，再利用border的transparent属性即可达到效果。而空心三角形是在空心三角形的基础上再加上伪元素（：after）实现。伪元素（：before）实现的是一个实心的三角形，伪元素（：after）实现的是空心的三角形，进而把实心的三角形覆盖，利用绝对定位的top与left的差值绝对了三角形线的粗细而达到如图的效果。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/css/">css</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/css/">css</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/15/CSS%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7%E5%92%8CBFC/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CSS高度塌陷和BFC</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/30/win10%E6%9B%B4%E6%96%B0%E5%90%8E%E9%97%AA%E5%B1%8F%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/">
+                        <span class="hidden-mobile">win10更新后闪屏处理方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="afetmin/utterance"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      总访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?d3c4bbd29d7df929e988a67667b6fe6e";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'G-CCDJNF04LD', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "CSS伪类实现三角形&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 60,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

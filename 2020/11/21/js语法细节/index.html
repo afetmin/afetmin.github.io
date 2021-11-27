@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#147153">
+  <meta name="description" content="">
+  <meta name="author" content="yilun">
+  <meta name="keywords" content="">
+  <title>js语法细节 - afetmin&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night-eighties.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>瞎写一气，乱编一通</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-11-21 10:49">
+                    2020年11月21日 上午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    2.9k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    34
+                     分钟
+                  </span>
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
+                    <i class="iconfont icon-eye" aria-hidden="true"></i>
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="箭头函数中的this"><a href="#箭头函数中的this" class="headerlink" title="箭头函数中的this"></a>箭头函数中的this</h2><p>它们没有 this。在箭头函数内部访问到的 this 都是从外部获取的。</p>
+<h2 id="可选链"><a href="#可选链" class="headerlink" title="可选链"></a>可选链</h2><ul>
+<li>通常我们这样写<div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">let</span> user = &#123;&#125;; <span class="hljs-comment">// user 没有 address</span>
+alert( user &amp;&amp; user.address &amp;&amp; user.address.street ); <span class="hljs-comment">// undefined（不报错）</span></code></pre></div>
+依次对整条路径上的属性使用与运算进行判断，以确保所有节点是存在的（如果不存在，则停止计算），但是写起来很麻烦。</li>
+<li>通过可选链可以这样<div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">let</span> user = <span class="hljs-literal">null</span>;
+alert( user?.address ); <span class="hljs-comment">// undefined</span>
+alert( user?.address.street ); <span class="hljs-comment">// undefined</span></code></pre></div>
+<blockquote>
+<p>不要过度使用可选链</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>我们应该只将 ?. 使用在一些东西可以不存在的地方。<br>例如，如果根据我们的代码逻辑，user 对象必须存在，但 address 是可选的，那么 user.address?.street 会更好。<br>所以，如果 user 恰巧因为失误变为 undefined，我们会看到一个编程错误并修复它。否则，代码中的错误在不恰当的地方被消除了，这会导致调试更加困难。</p>
+</blockquote>
+<div class="hljs"><pre><code class="hljs ?.()```检查左边是否存在，存在就执行,否则运算停止，不报错。">
+### 总结
+可选链 ?. 语法有三种形式：
+
+- obj?.prop —— 如果 obj 存在则返回 obj.prop，否则返回 undefined。
+- obj?.[prop] —— 如果 obj 存在则返回 obj[prop]，否则返回 undefined。
+- obj.method?.() —— 如果 obj.method 存在则调用 obj.method()，否则返回 undefined。
+&gt;正如我们所看到的，这些语法形式用起来都很简单直接。?. 检查左边部分是否为 null&#x2F;undefined，如果不是则继续运算。
+?. 链使我们能够安全地访问嵌套属性。
+
+&gt;但是，我们应该谨慎地使用 ?.，仅在当左边部分不存在也没问题的情况下使用为宜。以保证在代码中有编程上的错误出现时，也不会对我们隐藏。
+
+## Symbol
+如果我们要在对象字面量 &#123;...&#125; 中使用 Symbol，则需要使用方括号把它括起来。
+就像这样：
+&#96;&#96;&#96;js
+let id &#x3D; Symbol(&quot;id&quot;);
+
+let user &#x3D; &#123;
+  name: &quot;John&quot;,
+  [id]: 123 &#x2F;&#x2F; 而不是 &quot;id&quot;：123
+&#125;;</code></pre></div>
+<p>这是因为我们需要变量 id 的值作为键，而不是字符串 “id”。</p>
+<blockquote>
+<p>Symbol 属性不参与 for..in 循环。</p>
+</blockquote>
+<blockquote>
+<p>Object.assign 会同时复制字符串和 symbol 属性</p>
+</blockquote>
+<blockquote>
+<p>参考：<a href="https://zh.javascript.info/symbol#dui-xiang-zi-mian-liang-zhong-de-symbol" target="_blank" rel="noopener">symbol</a></p>
+</blockquote>
+<h2 id="对象原始值的转换"><a href="#对象原始值的转换" class="headerlink" title="对象原始值的转换"></a>对象原始值的转换</h2><p>如果没有 Symbol.toPrimitive，那么 JavaScript 将尝试找到它们，并且按照下面的顺序进行尝试：</p>
+<ul>
+<li>对于 “string” hint，toString -&gt; valueOf。</li>
+<li>其他情况，valueOf -&gt; toString。</li>
+</ul>
+<p>默认情况下，普通对象具有 toString 和 valueOf 方法：</p>
+<ul>
+<li>toString 方法返回一个字符串 “[object Object]”。</li>
+<li>valueOf 方法返回对象自身。</li>
+<li>如果没有 Symbol.toPrimitive 和 valueOf，toString 将处理所有原始转换。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>对象到原始值的转换，是由许多期望以原始值作为值的内建函数和运算符自动调用的。</p>
+<p>这里有三种类型（hint）：</p>
+<ul>
+<li>“string”（对于 alert 和其他需要字符串的操作）</li>
+<li>“number”（对于数学运算）</li>
+<li>“default”（少数运算符）<br>规范明确描述了哪个运算符使用哪个 hint。很少有运算符“不知道期望什么”并使用 “default” hint。通常对于内建对象，”default” hint 的处理方式与 “number” 相同，因此在实践中，最后两个 hint 常常合并在一起。</li>
+</ul>
+<p>转换算法是：</p>
+<p>1.调用 obj<a href="hint">Symbol.toPrimitive</a> 如果这个方法存在，</p>
+<p>2.否则，如果 hint 是 “string”</p>
+<ul>
+<li>尝试 obj.toString() 和 obj.valueOf()，无论哪个存在。</li>
+</ul>
+<p>3.否则，如果 hint 是 “number” 或者 “default”</p>
+<ul>
+<li>尝试 obj.valueOf() 和 obj.toString()，无论哪个存在。<br>在实践中，为了便于进行日志记录或调试，对于所有能够返回一种“可读性好”的对象的表达形式的转换，只实现以 obj.toString() 作为全能转换的方法就够了。</li>
+</ul>
+<blockquote>
+<p>参考 <a href="https://zh.javascript.info/object-toprimitive#symboltoprimitive" target="_blank" rel="noopener">Symbol.toPrimitive</a></p>
+</blockquote>
+<h2 id="关于数组的length"><a href="#关于数组的length" class="headerlink" title="关于数组的length"></a>关于数组的length</h2><p>当我们修改数组的时候，length 属性会自动更新。准确来说，它实际上不是数组里元素的个数，而是最大的数字索引值加一。</p>
+<p>例如，一个数组只有一个元素，但是这个元素的索引值很大，那么这个数组的 length 也会很大：</p>
+<div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">let</span> fruits = [];
+fruits[<span class="hljs-number">123</span>] = <span class="hljs-string">"Apple"</span>;
+
+alert( fruits.length ); <span class="hljs-comment">// 124</span></code></pre></div>
+<p>要知道的是我们通常不会这样使用数组。</p>
+<p>length 属性的另一个有意思的点是它是可写的。</p>
+<p>如果我们手动增加它，则不会发生任何有趣的事儿。但是如果我们减少它，数组就会被截断。该过程是不可逆的，下面是例子：</p>
+<div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];
+
+arr.length = <span class="hljs-number">2</span>; <span class="hljs-comment">// 截断到只剩 2 个元素</span>
+alert( arr ); <span class="hljs-comment">// [1, 2]</span>
+
+arr.length = <span class="hljs-number">5</span>; <span class="hljs-comment">// 又把 length 加回来</span>
+alert( arr[<span class="hljs-number">3</span>] ); <span class="hljs-comment">// undefined：被截断的那些数值并没有回来</span></code></pre></div>
+<blockquote>
+<p>所以，清空数组最简单的方法就是：arr.length = 0;</p>
+</blockquote>
+<h2 id="关于JSON的转换"><a href="#关于JSON的转换" class="headerlink" title="关于JSON的转换"></a>关于JSON的转换</h2><p>JSON 是语言无关的纯数据规范，因此一些特定于 JavaScript 的对象属性会被 JSON.stringify 跳过。</p>
+<p>即：</p>
+<ul>
+<li>函数属性（方法）。</li>
+<li>Symbol 类型的属性。</li>
+<li>存储 undefined 的属性。</li>
+</ul>
+<h2 id="js中函数就是对象"><a href="#js中函数就是对象" class="headerlink" title="js中函数就是对象"></a>js中函数就是对象</h2><blockquote>
+<p>被赋值给函数的属性，比如 sayHi.counter = 0，不会 在函数内定义一个局部变量 counter。换句话说，属性 counter 和变量 let counter 是毫不相关的两个东西。</p>
+</blockquote>
+<blockquote>
+<p>我们可以把函数当作对象，在它里面存储属性，但是这对它的执行没有任何影响。变量不是函数属性，反之亦然。它们之间是平行的。</p>
+</blockquote>
+<h2 id="关于this和箭头函数"><a href="#关于this和箭头函数" class="headerlink" title="关于this和箭头函数"></a>关于this和箭头函数</h2><p>箭头函数</p>
+<ul>
+<li>没有 this</li>
+<li>没有 arguments</li>
+<li>不能使用 new 进行调用</li>
+<li>它们也没有 super</li>
+</ul>
+<p>所以箭头函数里的 <code>this</code> 的查找与常规变量的搜索方式完全相同：在外部词法环境中查找。</p>
+<h2 id="关于proto和prototype"><a href="#关于proto和prototype" class="headerlink" title="关于proto和prototype"></a>关于<strong>proto</strong>和prototype</h2><blockquote>
+<p>初学者常犯一个普遍的错误，就是不知道 <code>__proto__</code> 和 [[Prototype]] 的区别。<br>请注意，<code>__proto__</code> 与内部的 [[Prototype]] 不一样。<code>__proto__</code> 是 [[Prototype]] 的 getter/setter。稍后，我们将看到在什么情况下理解它们很重要，在建立对 JavaScript 语言的理解时，让我们牢记这一点。</p>
+</blockquote>
+<div class="hljs"><pre><code class="hljs __proto__```">根据规范，&#96;&#96;&#96;__proto__&#96;&#96;&#96; 必须仅受浏览器环境的支持。但实际上，包括服务端在内的所有环境都支持它，因此我们使用它是非常安全的。
+
+
+重要：[this的值](https:&#x2F;&#x2F;zh.javascript.info&#x2F;prototype-inheritance#this-de-zhi)
+
+### 设置和直接访问原型的现代方法
+设置和直接访问原型的现代方法有：
+
+- Object.create(proto, [descriptors]) —— 利用给定的 proto 作为 [[Prototype]]（可以是 null）和可选的属性描述来创建一个空对象。
+- Object.getPrototypeOf(obj) —— 返回对象 obj 的 [[Prototype]]（与 &#96;&#96;&#96;__proto__&#96;&#96;&#96; 的 getter 相同）。
+- Object.setPrototypeOf(obj, proto) —— 将对象 obj 的 [[Prototype]] 设置为 proto（与 &#96;&#96;&#96;__proto__&#96;&#96;&#96; 的 setter 相同）。
+
+如果要将一个用户生成的键放入一个对象，那么内建的 &#96;&#96;&#96;__proto__&#96;&#96;&#96; getter&#x2F;setter 是不安全的。因为用户可能会输入 &quot;&#96;&#96;&#96;__proto__&#96;&#96;&#96;&quot; 作为键，这会导致一个 error，虽然我们希望这个问题不会造成什么大影响，但通常会造成不可预料的后果。
+
+因此，我们可以使用 Object.create(null) 创建一个没有 &#96;&#96;&#96;__proto__&#96;&#96;&#96; 的 “very plain” 对象，或者对此类场景坚持使用 Map 对象就可以了。
+
+此外，Object.create 提供了一种简单的方式来浅拷贝一个对象的所有描述符：
+&#96;&#96;&#96;js
+let clone &#x3D; Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));</code></pre></div>
+
+<p>此外，我们还明确了 <code>__proto__</code> 是 [[Prototype]] 的 getter/setter，就像其他方法一样，它位于 Object.prototype。</p>
+<p>我们可以通过 Object.create(null) 来创建没有原型的对象。这样的对象被用作 “pure dictionaries”，对于它们而言，使用 “<code>__proto__</code>“ 作为键是没有问题的。</p>
+<p>其他方法：</p>
+<ul>
+<li>Object.keys(obj) / Object.values(obj) / Object.entries(obj) —— 返回一个可枚举的由自身的字符串属性名/值/键值对组成的数组。</li>
+<li>Object.getOwnPropertySymbols(obj) —— 返回一个由自身所有的 symbol 类型的键组成的数组。</li>
+<li>Object.getOwnPropertyNames(obj) —— 返回一个由自身所有的字符串键组成的数组。</li>
+<li>Reflect.ownKeys(obj) —— 返回一个由自身所有键组成的数组。</li>
+<li>obj.hasOwnProperty(key)：如果 obj 拥有名为 key 的自身的属性（非继承而来的），则返回 true。</li>
+</ul>
+<p>所有返回对象属性的方法（如Object.keys 及其他）—— 都返回“自身”的属性。如果我们想继承它们，我们可以使用 for…in。</p>
+<h2 id="关于类继承"><a href="#关于类继承" class="headerlink" title="关于类继承"></a>关于类继承</h2><p>1.想要扩展一个类：class Child extends Parent：</p>
+<ul>
+<li>这意味着 Child.prototype.<strong>proto</strong> 将是 Parent.prototype，所以方法会被继承。</li>
+</ul>
+<p>2.重写一个 constructor：</p>
+<ul>
+<li>在使用 this 之前，我们必须在 Child 的 constructor 中将父 constructor 调用为 super()。</li>
+</ul>
+<p>3.重写一个方法：</p>
+<ul>
+<li>我们可以在一个 Child 方法中使用 super.method() 来调用 Parent 方法。</li>
+</ul>
+<p>4.内部：</p>
+<ul>
+<li>方法在内部的 [[HomeObject]] 属性中记住了它们的类/对象。这就是 super 如何解析父方法的。</li>
+<li>因此，将一个带有 super 的方法从一个对象复制到另一个对象是不安全的。</li>
+</ul>
+<p>补充：</p>
+<p>箭头函数没有自己的 this 或 super，所以它们能融入到就近的上下文中，像透明似的。</p>
+<h2 id="类检查”instanceof”"><a href="#类检查”instanceof”" class="headerlink" title="类检查”instanceof”"></a>类检查”instanceof”</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>用于</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>原始数据类型</td>
+<td>string</td>
+</tr>
+<tr>
+<td>{}.toString.call</td>
+<td>原始数据类型，内建对象，包含Symbol.toStringTag属性的对象</td>
+<td>string</td>
+</tr>
+<tr>
+<td>instanceof</td>
+<td>对象</td>
+<td>true/false</td>
+</tr>
+</tbody></table>
+<p>如表所示：{}.toString.call (Object.prototype.toString) 可以检查对象的类型并返回字符串，而不是像toString仅仅返回 <code>[Object,Object]</code></p>
+<div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">let</span> s = <span class="hljs-built_in">Object</span>.prototype.toString;
+
+alert( s.call(<span class="hljs-number">123</span>) ); <span class="hljs-comment">// [object Number]</span>
+alert( s.call(<span class="hljs-literal">null</span>) ); <span class="hljs-comment">// [object Null]</span>
+alert( s.call(alert) ); <span class="hljs-comment">// [object Function]</span></code></pre></div>
+
+<h2 id="模块的导入和导出"><a href="#模块的导入和导出" class="headerlink" title="模块的导入和导出"></a>模块的导入和导出</h2><ul>
+<li>在声明一个 class/function/… 之前：<ul>
+<li>export [default] class/function/variable …</li>
+</ul>
+</li>
+<li>独立的导出：<ul>
+<li>export {x [as y], …}.</li>
+</ul>
+</li>
+<li>重新导出：<ul>
+<li>export {x [as y], …} from “module”</li>
+<li>export * from “module”（不会重新导出默认的导出）。</li>
+<li>export {default [as y]} from “module”（重新导出默认的导出）。</li>
+</ul>
+</li>
+</ul>
+<p>导入：</p>
+<ul>
+<li>模块中命名的导入：<ul>
+<li>import {x [as y], …} from “module”</li>
+</ul>
+</li>
+<li>默认的导入：<ul>
+<li>import x from “module”</li>
+<li>import {default as x} from “module”</li>
+</ul>
+</li>
+<li>所有：<ul>
+<li>import * as obj from “module”</li>
+</ul>
+</li>
+<li>导入模块（它的代码，并运行），但不要将其赋值给变量：<ul>
+<li>import “module”</li>
+</ul>
+</li>
+</ul>
+<p>我们把 import/export 语句放在脚本的顶部或底部，都没关系。</p>
+<h2 id="处理程序选项-“passive”"><a href="#处理程序选项-“passive”" class="headerlink" title="处理程序选项 “passive”"></a>处理程序选项 “passive”</h2><p>addEventListener 的可选项 passive: true 向浏览器发出信号，表明处理程序将不会调用 preventDefault()。</p>
+<p>为什么需要这样做？</p>
+<p>移动设备上会发生一些事件，例如 touchmove（当用户在屏幕上移动手指时），默认情况下会导致滚动，但是可以使用处理程序的 preventDefault() 来阻止滚动。</p>
+<p>因此，当浏览器检测到此类事件时，它必须首先处理所有处理程序，然后如果没有任何地方调用 preventDefault，则页面可以继续滚动。但这可能会导致 UI 中不必要的延迟和“抖动”。</p>
+<p>passive: true 选项告诉浏览器，处理程序不会取消滚动。然后浏览器立即滚动页面以提供最大程度的流畅体验，并通过某种方式处理事件。</p>
+<p>对于某些浏览器（Firefox，Chrome），默认情况下，touchstart 和 touchmove 事件的 passive 为 true。</p>
+<h2 id="async和defer"><a href="#async和defer" class="headerlink" title="async和defer"></a>async和defer</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>顺序</th>
+<th>DOMContentLoaded</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>async</td>
+<td>加载优先顺序。脚本在文档中的顺序不重要 —— 先加载完成的先执行</td>
+<td>不相关。可能在文档加载完成前加载并执行完毕。如果脚本很小或者来自于缓存，同时文档足够长，就会发生这种情况。</td>
+</tr>
+<tr>
+<td>defer</td>
+<td>文档顺序（它们在文档中的顺序）</td>
+<td>在文档加载和解析完成之后（如果需要，则会等待），即在 DOMContentLoaded 之前执行。</td>
+</tr>
+</tbody></table>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/js/">js</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%9B%E9%98%B6/">进阶</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/29/v-show%E5%92%8Cv-if%E7%9A%84%E6%80%9D%E8%80%83/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">v-show和v-if的思考</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/07/vue%E4%B8%AD%E7%9A%84-passive%E4%BF%AE%E9%A5%B0%E7%AC%A6/">
+                        <span class="hidden-mobile">vue中的.passive修饰符</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="afetmin/utterance"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      总访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?d3c4bbd29d7df929e988a67667b6fe6e";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'G-CCDJNF04LD', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "js语法细节&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 60,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

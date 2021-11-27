@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#147153">
+  <meta name="description" content="">
+  <meta name="author" content="yilun">
+  <meta name="keywords" content="">
+  <title>关于中间件 - afetmin&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night-eighties.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>瞎写一气，乱编一通</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2021-09-19 09:51">
+                    2021年9月19日 上午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    954 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    13
+                     分钟
+                  </span>
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
+                    <i class="iconfont icon-eye" aria-hidden="true"></i>
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h1><p>使用 node 构建 web 应用时，并不单单响应一个简单的 hello world，在一个实际的业务中，我们也许会做这些：</p>
+<ul>
+<li>请求方法的判断。</li>
+<li>URL 的路径解析。</li>
+<li>URL 中查询字符串解析。</li>
+<li>Cookie 的解析。</li>
+<li>Basic 认证。</li>
+<li>表单数据的解析。</li>
+<li>任意格式文件的上传处理。</li>
+</ul>
+<p>这样一个完整的项目中需要处理很多的细节，当然你也可以都写在一起，但这样代码的耦合程度太高了，而且以后维护起来也令人头大。</p>
+<p>为此引入<strong>中间件（middleware）</strong>来简化和隔离这些基础设施与业务逻辑之间的细节，让开发者能够关注在业务的开发上，以达到提升开发效率的目的。</p>
+<p>理解中间件的最简单的方式是实现一个基础的中间件模式，一个中间件其实就是一个函数。</p>
+<p>一个简单的中间件模式需要一个 use 方法来进行中间件的注册，需要一个 run 来执行这些注册的中间件</p>
+<div class="hljs"><pre><code class="hljs jsx"><span class="hljs-keyword">const</span> app = &#123;
+  fns: [],
+  callback(ctx) &#123;
+    <span class="hljs-built_in">console</span>.log(ctx)
+  &#125;,
+  use(fn) &#123;
+    <span class="hljs-keyword">this</span>.fns.push(fn)
+  &#125;,
+  run(ctx) &#123;
+    <span class="hljs-keyword">let</span> index = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">const</span> next = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;
+      index++
+    &#125;
+    <span class="hljs-keyword">this</span>.fns.forEach(<span class="hljs-function">(<span class="hljs-params">fn, idx</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">if</span> (index === idx) fn(ctx, next)
+    &#125;)
+    index === <span class="hljs-keyword">this</span>.fns.length &amp;&amp; <span class="hljs-keyword">this</span>.callback(ctx)
+  &#125;,
+&#125;</code></pre></div>
+
+<p>使用一下：</p>
+<div class="hljs"><pre><code class="hljs jsx">app.use(<span class="hljs-function">(<span class="hljs-params">ctx, next</span>) =&gt;</span> &#123;
+  ctx.name = <span class="hljs-string">"ranxiu"</span>
+  next()
+&#125;)
+
+app.use(<span class="hljs-function">(<span class="hljs-params">ctx, next</span>) =&gt;</span> &#123;
+  ctx.gender = <span class="hljs-string">"girl"</span>
+  next()
+&#125;)
+
+app.run(&#123;&#125;)
+<span class="hljs-comment">// 打印：&#123;name:"ranxiu",gender:"girl"&#125;</span></code></pre></div>
+
+<p>关于 run 函数还有更加优雅的写法：</p>
+<div class="hljs"><pre><code class="hljs jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span>(<span class="hljs-params">ctx, stack</span>) </span>&#123;
+  <span class="hljs-keyword">const</span> next = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;
+    <span class="hljs-keyword">const</span> middleware = stack.shift()
+    <span class="hljs-keyword">if</span> (middleware) &#123;
+      middleware(ctx, next) <span class="hljs-comment">// 递归调用</span>
+    &#125;
+  &#125;
+  next()
+&#125;</code></pre></div>
+
+<p>再来看看 koa-compose 的中间件：</p>
+<div class="hljs"><pre><code class="hljs jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">compose</span>(<span class="hljs-params">middleware</span>) </span>&#123;
+  <span class="hljs-comment">// 提前判断中间件类型,防止后续错误</span>
+  <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Array</span>.isArray(middleware))
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">"Middleware stack must be an array!"</span>)
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> fn <span class="hljs-keyword">of</span> middleware) &#123;
+    <span class="hljs-comment">// 中间件必须为函数类型</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> fn !== <span class="hljs-string">"function"</span>)
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">"Middleware must be composed of functions!"</span>)
+  &#125;
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context, next</span>) </span>&#123;
+    <span class="hljs-comment">// 采用闭包将索引缓存,来实现调用计数</span>
+    <span class="hljs-keyword">let</span> index = <span class="hljs-number">-1</span>
+    <span class="hljs-keyword">return</span> dispatch(<span class="hljs-number">0</span>)
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dispatch</span>(<span class="hljs-params">i</span>) </span>&#123;
+      <span class="hljs-comment">// 防止next()方法重复调用</span>
+      <span class="hljs-keyword">if</span> (i &lt;= index)
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"next() called multiple times"</span>))
+      index = i
+      <span class="hljs-keyword">let</span> fn = middleware[i]
+      <span class="hljs-keyword">if</span> (i === middleware.length) fn = next
+      <span class="hljs-keyword">if</span> (!fn) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve()
+      <span class="hljs-keyword">try</span> &#123;
+        <span class="hljs-comment">// 包装next()返回值为Promise对象</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(fn(context, dispatch.bind(<span class="hljs-literal">null</span>, i + <span class="hljs-number">1</span>)))
+      &#125; <span class="hljs-keyword">catch</span> (err) &#123;
+        <span class="hljs-comment">// 异常处理</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(err)
+      &#125;
+    &#125;
+  &#125;
+&#125;</code></pre></div>
+
+<p>两个字：优雅。有时不得不感慨人和人的差距有时比人和狗的差距还大。</p>
+<p>拿这个 🌰 来说：</p>
+<div class="hljs"><pre><code class="hljs jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wait</span>(<span class="hljs-params">ms</span>) </span>&#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> setTimeout(resolve, ms || <span class="hljs-number">1</span>))
+&#125;
+
+<span class="hljs-keyword">const</span> arr = []
+<span class="hljs-keyword">const</span> stack = []
+
+<span class="hljs-comment">// type Middleware&lt;T&gt; = (context: T, next: Koa.Next) =&gt; any;</span>
+stack.push(<span class="hljs-keyword">async</span> (context, next) =&gt; &#123;
+  arr.push(<span class="hljs-number">1</span>)
+  <span class="hljs-keyword">await</span> wait(<span class="hljs-number">1</span>)
+  <span class="hljs-keyword">await</span> next()
+  <span class="hljs-keyword">await</span> wait(<span class="hljs-number">1</span>)
+  arr.push(<span class="hljs-number">6</span>)
+&#125;)
+
+stack.push(<span class="hljs-keyword">async</span> (context, next) =&gt; &#123;
+  arr.push(<span class="hljs-number">2</span>)
+  <span class="hljs-keyword">await</span> wait(<span class="hljs-number">1</span>)
+  <span class="hljs-keyword">await</span> next()
+  <span class="hljs-keyword">await</span> wait(<span class="hljs-number">1</span>)
+  arr.push(<span class="hljs-number">5</span>)
+&#125;)
+
+stack.push(<span class="hljs-keyword">async</span> (context, next) =&gt; &#123;
+  arr.push(<span class="hljs-number">3</span>)
+  <span class="hljs-keyword">await</span> wait(<span class="hljs-number">1</span>)
+  <span class="hljs-keyword">await</span> next()
+  <span class="hljs-keyword">await</span> wait(<span class="hljs-number">1</span>)
+  arr.push(<span class="hljs-number">4</span>)
+&#125;)
+
+<span class="hljs-keyword">await</span> compose(stack)(&#123;&#125;)
+<span class="hljs-comment">// arr = [1,2,3,4,5,6]</span></code></pre></div>
+
+<p>当 i 为 3 时，</p>
+<div class="hljs"><pre><code class="hljs jsx"><span class="hljs-keyword">let</span> fn = middleware[i] <span class="hljs-comment">//fn=undefined</span>
+<span class="hljs-keyword">if</span> (i === middleware.length) fn = next
+<span class="hljs-keyword">if</span> (!fn) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve() <span class="hljs-comment">//!fn为true</span></code></pre></div>
+
+<p>直接返回 resolve，之后就执行 next()后面的函数</p>
+<div class="hljs"><pre><code class="hljs jsx">stack.push(<span class="hljs-keyword">async</span> (context, next) =&gt; &#123;
+  arr.push(<span class="hljs-number">3</span>)
+  <span class="hljs-keyword">await</span> wait(<span class="hljs-number">1</span>)
+  <span class="hljs-keyword">await</span> next()
+  <span class="hljs-keyword">await</span> wait(<span class="hljs-number">1</span>)
+  arr.push(<span class="hljs-number">4</span>)
+&#125;)</code></pre></div>
+
+<p>执行完后返回第二个 next() 后面继续往下执行，知道所有的中间件执行完毕。</p>
+<p>这便是众人皆知的“洋葱模型”。你也可以选择只添加前置的处理，就是 await next()前面的操作</p>
+<p>，或者后面的处理。@洋葱利用洋葱模型实现了设计圈的前置逻辑的初始化，洋葱 🐂🍺。</p>
+<p>每个中间件足够的小而美，职责单一，同时多个中间件又具备良好的逻辑拓展性和可组合性，并且易于测试。这个设计模式真是太“漂亮”了。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/node/">node</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/18/React%E7%9A%84diff/">
+                        <span class="hidden-mobile">React的diff</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="afetmin/utterance"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      总访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?d3c4bbd29d7df929e988a67667b6fe6e";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'G-CCDJNF04LD', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "关于中间件&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 60,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
