@@ -70,8 +70,8 @@ $$
 
 　　同样地，定义：
 
-- $Z^{[l]} = \begin{bmatrix} z^{[l](1)} & z^{[l](2)} & \cdots & z^{[l](m)} \end{bmatrix}$
-- $A^{[l]} = \begin{bmatrix} a^{[l](1)} & a^{[l](2)} & \cdots & a^{[l](m)} \end{bmatrix}$
+- $Z^{[l]} = \begin{bmatrix} z^{[l]\!(1)} & z^{[l]\!(2)} & \cdots & z^{[l]\!(m)} \end{bmatrix}$
+- $A^{[l]} = \begin{bmatrix} a^{[l]\!(1)} & a^{[l]\!(2)} & \cdots & a^{[l]\!(m)} \end{bmatrix}$
 
 　　则向量化前向传播公式为：
 

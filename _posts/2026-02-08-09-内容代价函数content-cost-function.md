@@ -51,13 +51,13 @@ $$
 
 设：
 
-- $a^{[l](C)}$：内容图像 $C$ 在第 $l$ 层的激活值（形状为 $n_H \times n_W \times n_C$）
-- $a^{[l](G)}$：生成图像 $G$ 在第 $l$ 层的激活值
+- $a^{[l]\!(C)}$：内容图像 $C$ 在第 $l$ 层的激活值（形状为 $n_H \times n_W \times n_C$）
+- $a^{[l]\!(G)}$：生成图像 $G$ 在第 $l$ 层的激活值
 
 将激活张量展平为向量（或直接按元素计算），定义内容代价为：
 
 $$
-J_{\text{content}}^{[l]}(C, G) = \frac{1}{4 \cdot n_H \cdot n_W \cdot n_C} \left\| a^{[l](C)} - a^{[l](G)} \right\|_F^2
+J_{\text{content}}^{[l]}(C, G) = \frac{1}{4 \cdot n_H \cdot n_W \cdot n_C} \left\| a^{[l]\!(C)} - a^{[l]\!(G)} \right\|_F^2
 $$
 
 其中：
@@ -68,7 +68,7 @@ $$
 > 💡 注：有些资料省略归一化项，写作
 >
 > $$
-> J_{\text{content}} = \frac{1}{2} \sum_{i,j,k} \left( a^{[l](C)}_{ijk} - a^{[l](G)}_{ijk} \right)^2
+> J_{\text{content}} = \frac{1}{2} \sum_{i,j,k} \left( a^{[l]\!(C)}_{ijk} - a^{[l]\!(G)}_{ijk} \right)^2
 > $$
 >
 > 这与上述形式等价，仅常数因子不同，不影响优化方向。

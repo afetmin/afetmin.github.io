@@ -50,10 +50,10 @@ for i in range(m):
 
 $$
 \begin{aligned}
-\mathbf{z}^{[1](i)} &= \mathbf{W}^{[1]} \mathbf{x}^{(i)} + \mathbf{b}^{[1]} \\
-\mathbf{a}^{[1](i)} &= g^{[1]}(\mathbf{z}^{[1](i)}) \\
-z^{[2](i)} &= \mathbf{w}^{[2]T} \mathbf{a}^{[1](i)} + b^{[2]} \\
-a^{[2](i)} &= g^{[2]}(z^{[2](i)})
+\mathbf{z}^{[1]\!(i)} &= \mathbf{W}^{[1]} \mathbf{x}^{(i)} + \mathbf{b}^{[1]} \\
+\mathbf{a}^{[1]\!(i)} &= g^{[1]}(\mathbf{z}^{[1]\!(i)}) \\
+z^{[2]\!(i)} &= \mathbf{w}^{[2]T} \mathbf{a}^{[1]\!(i)} + b^{[2]} \\
+a^{[2]\!(i)} &= g^{[2]}(z^{[2]\!(i)})
 \end{aligned}
 $$
 
@@ -97,10 +97,10 @@ $$
 \right]
 = 
 \left[
-\mathbf{z}^{[1](1)},
-\mathbf{z}^{[1](2)},
+\mathbf{z}^{[1]\!(1)},
+\mathbf{z}^{[1]\!(2)},
 \dots,
-\mathbf{z}^{[1](m)}
+\mathbf{z}^{[1]\!(m)}
 \right]
 = \mathbf{Z}^{[1]}
 $$
@@ -142,8 +142,8 @@ $$
 |操作|非向量化（循环）|向量化（矩阵）|
 | ----------| ------------------| ----------------|
 |输入|$\mathbf{x}^{(i)}$|$\mathbf{X} \in \mathbb{R}^{n_x \times m}$|
-|线性输出|$\mathbf{z}^{[1](i)} = \mathbf{W}^{[1]} \mathbf{x}^{(i)} + \mathbf{b}^{[1]}$|$\mathbf{Z}^{[1]} = \mathbf{W}^{[1]} \mathbf{X} + \mathbf{b}^{[1]}$|
-|激活输出|$\mathbf{a}^{[1](i)} = g(\mathbf{z}^{[1](i)})$|$\mathbf{A}^{[1]} = g(\mathbf{Z}^{[1]})$|
+|线性输出|$\mathbf{z}^{[1]\!(i)} = \mathbf{W}^{[1]} \mathbf{x}^{(i)} + \mathbf{b}^{[1]}$|$\mathbf{Z}^{[1]} = \mathbf{W}^{[1]} \mathbf{X} + \mathbf{b}^{[1]}$|
+|激活输出|$\mathbf{a}^{[1]\!(i)} = g(\mathbf{z}^{[1]\!(i)})$|$\mathbf{A}^{[1]} = g(\mathbf{Z}^{[1]})$|
 
 　　✅ **优势**：
 

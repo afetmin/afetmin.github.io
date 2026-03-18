@@ -134,7 +134,7 @@ $$
 　　将 m 个样本堆叠成矩阵：
 
 - $\mathbf{X} = [\mathbf{x}^{(1)}, \dots, \mathbf{x}^{(m)}] \in \mathbb{R}^{n_x \times m}$
-- $\mathbf{A}^{[1]} = [\mathbf{a}^{[1](1)}, \dots, \mathbf{a}^{[1](m)}] \in \mathbb{R}^{n^{[1]} \times m}$
+- $\mathbf{A}^{[1]} = [\mathbf{a}^{[1]\!(1)}, \dots, \mathbf{a}^{[1]\!(m)}] \in \mathbb{R}^{n^{[1]} \times m}$
 - $\mathbf{Y} = [y^{(1)}, \dots, y^{(m)}] \in \mathbb{R}^{1 \times m}$
 
 ### 向量化反向传播公式：
