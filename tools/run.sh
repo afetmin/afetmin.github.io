@@ -2,6 +2,21 @@
 #
 # Run jekyll serve and then launch the site
 
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+RUBY31_BIN="/opt/homebrew/opt/ruby@3.1/bin"
+
+export PATH="$RUBY31_BIN:$PATH"
+export BUNDLE_PATH="$PROJECT_DIR/vendor/bundle"
+export BUNDLE_DISABLE_SHARED_GEMS=true
+export GEM_HOME="$PROJECT_DIR/vendor/bundle"
+export GEM_PATH="$PROJECT_DIR/vendor/bundle"
+export BUNDLE_USER_HOME="$PROJECT_DIR/.bundle-home"
+export BUNDLE_APP_CONFIG="$PROJECT_DIR/.bundle"
+export BUNDLE_CACHE_PATH="$PROJECT_DIR/.bundle-cache"
+
 prod=false
 command="bundle exec jekyll s -l"
 host="127.0.0.1"

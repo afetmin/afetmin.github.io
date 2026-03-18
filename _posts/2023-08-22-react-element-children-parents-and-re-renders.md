@@ -209,6 +209,7 @@ const Parent = () => {
 
 #### 为什么作为prop传递的组件不会重新渲染？
 
+{% raw %}
 ```jsx
 const MovingComponent = ({ children }) => {
   // this will trigger re-render
@@ -232,6 +233,7 @@ const SomeOutsideComponent = () => {
   )
 }
 ```
+{% endraw %}
 
 这是因为 <ChildComponent /> 是在 SomeOutsideComponent 中创建的， MovingComponent 重新渲染时它的props并没有改变，child 不会重新创建，也不会重新渲染。
 
