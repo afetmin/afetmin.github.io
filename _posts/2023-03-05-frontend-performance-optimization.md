@@ -1,6 +1,6 @@
 ---
-title: 前端性能优化方法
-date: "2023-03-05 11:27:58"
+title: "前端性能优化方法"
+date: 2023-03-05 11:27:58
 categories:
   - js
 ---
@@ -76,7 +76,7 @@ ul > li 可以不写闭合
 
 ### 作用域提升（scope hoisting）
 
-​![image](/assets/img/posts/frontend-performance-optimization/image.png)​
+![image](/assets/img/posts/frontend-performance-optimization/image.png)
 
 默认是开启的
 
@@ -103,8 +103,6 @@ ul > li 可以不写闭合
 - 避免打包时对不变的库重复构建
 - 提高构建速度
 - 针对开发环境
-
-‍
 
 ```js
 // webpack.dll.config.js
@@ -205,7 +203,7 @@ optimization: {
 
 #### 原理
 
-​![image](/assets/img/posts/frontend-performance-optimization/image2.png)​
+![image](/assets/img/posts/frontend-performance-optimization/image2.png)
 
 离线的时候是从 service worker 拿资源
 
@@ -224,7 +222,7 @@ optimization: {
 
 本地开发时，如果提示不安全网站，可以直接键盘输入 “thisisunsafe”
 
-​![image](/assets/img/posts/frontend-performance-optimization/image3.png)​​
+![image](/assets/img/posts/frontend-performance-optimization/image3.png)
 
 ## 服务端渲染 SSR
 
@@ -235,5 +233,3 @@ optimization: {
 
 - 架构- 大型、动态页面、面向公众
 - 搜索引擎排名很重要
-
-‍
