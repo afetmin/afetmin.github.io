@@ -47,11 +47,11 @@ social:
 
 # Site Verification Settings
 webmaster_verifications:
-  google: # fill in your Google verification code
-  bing: # fill in your Bing verification code
+  google: IT-Y25F5RCj2PCcER-kk9d5-HNubsC889CdBMXmjtZY
+  bing: B87806C7BDCEE73E30D63422AFE6515C
   alexa: # fill in your Alexa verification code
   yandex: # fill in your Yandex verification code
-  baidu: # fill in your Baidu verification code
+  baidu: # blog source had a verification field but no usable value for Chirpy
   facebook: # fill in your Facebook verification code
 
 # ↑ --------------------------
@@ -64,8 +64,8 @@ analytics:
   goatcounter:
     id: # fill in your GoatCounter ID
   umami:
-    id: # fill in your Umami ID
-    domain: # fill in your Umami domain
+    id: f7e43abb-be35-494a-8984-2586daf37f19
+    domain: afetmin.github.io
   matomo:
     id: # fill in your Matomo ID
     domain: # fill in your Matomo domain
@@ -99,7 +99,7 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: /assets/img/avatar.png
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
@@ -110,14 +110,14 @@ toc: true
 
 comments:
   # Global switch for the post-comment system. Keeping it empty means disabled.
-  provider: # [disqus | utterances | giscus]
+  provider: utterances
   # The provider options are as follows:
   disqus:
     shortname: # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
   # utterances settings › https://utteranc.es/
   utterances:
-    repo: # <gh-username>/<repo>
-    issue_term: # < url | pathname | title | ...>
+    repo: afetmin/afetmin.github.io
+    issue_term: pathname
   # Giscus options › https://giscus.app
   giscus:
     repo: # <gh-username>/<repo>
