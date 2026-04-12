@@ -1,6 +1,7 @@
 ---
 title: "浏览器和 Node.js 里的 console.log 有什么不一样"
-date: 2026-04-12 22:05:47
+date: 2026-04-12T18:19:31+08:00
+last_modified_at: 2026-04-12T18:19:31+08:00
 categories:
   - js
 tags:
