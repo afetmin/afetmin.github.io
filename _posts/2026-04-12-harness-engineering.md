@@ -1,5 +1,5 @@
 ---
-title: "Hidden Class 和 Inline Cache"
+title: "为什么 Agent 能不能跑稳，关键不只是模型：从 Prompt、Context 到 Harness Engineering"
 slug: harness-engineering
 date: 2026-04-12T20:01:40+08:00
 last_modified_at: 2026-04-12T20:01:40+08:00
