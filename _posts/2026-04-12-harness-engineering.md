@@ -7,7 +7,6 @@ categories:
   - AI
 ---
 
-# 为什么 Agent 能不能跑稳，关键不只是模型：从 Prompt、Context 到 Harness Engineering
 
 这两年，AI 圈很喜欢造新词。
 
