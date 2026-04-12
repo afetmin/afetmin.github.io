@@ -1,5 +1,6 @@
 ---
 title: "Hidden Class 和 Inline Cache"
+slug: hidden-class-and-inline-cache
 date: 2026-03-31T20:01:40+08:00
 last_modified_at: 2026-03-31T20:01:40+08:00
 categories:
